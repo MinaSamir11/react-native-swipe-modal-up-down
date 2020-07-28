@@ -7,15 +7,18 @@ $ npm install react-native-swipe-modal-up-down
 ```
 
 # Usage
-
-`import SwipeUpDownModal from 'react-native-swipe-modal-up-down';`
+```sh
+import SwipeUpDownModal from 'react-native-swipe-modal-up-down';
+```
 
 ```javascript
 
   let [ShowComment, setShowModelComment] = useState(false);
+  let [animateModal, setanimateModal] = useState(false);
 
 <SwipeUpDownModal
   modalVisible={ShowComment}
+  PressToanimate={animateModal}
   //if you don't pass HeaderContent you should pass marginTop in view of ContentModel to Make modal swipeable
   ContentModal={
     <View style={styles.containerContent}>
@@ -32,11 +35,17 @@ $ npm install react-native-swipe-modal-up-down
   ContentModalStyle={styles.Modal}
   HeaderContent={
     <View style={styles.containerHeader}>
-      <Text>Header Content</Text>
+          <Button 
+              Title={"Press Me"}
+              onPress={() => {
+                setanimateModal(true);
+              }}
+           />
     </View>
   }
   onClose={() => {
-    setShowModelComment(false);
+      setModelComment(false);
+      setanimateModal(false);
   }}
 />
 
