@@ -81,3 +81,8 @@ HeaderStyle  | any | opacity, width: 700, marginTop: 50, position: 'absolute' | 
 onClose  | func | () => null | Called when Modal closed
 ImageBackgroundModal  | image | null | you can set imagebackground of modal instead of backgroundColor
 ImageBackgroundModalStyle | any | null | `for example : borderTopLeftRadius: 25, borderTopRightRadius: 25`
+duration | milliseconds | 450 | Length of animation
+DisableHandAnimation | Boolean | false | Disable Hand animate 
+PressToanimate | Boolean | null | close modal showing animation by set value equal true
+PressToanimateDirection | String | 'down' | Direction of animating Modal while closing
+fade | Boolean | true | fading animation while opening/closing
