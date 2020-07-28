@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
+    backgroundColor: '#F1F1F1',
   },
   headerContent:{
     marginTop: 0,
