@@ -1,0 +1,35 @@
+{
+  "name": "react-native-swipe-modal-up-down",
+  "version": "1.0.1",
+  "description": "react native swipe up down it's animation modal to swipe down or up as Facebook comments, profile picture animation. it support flat-list and scroll view inside it without conflict with animation down and scrolling down",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MinaSamir11/react-native-swipe-modal-up-down.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "swipe",
+    "down",
+    "up",
+    "android",
+    "ios",
+    "flatlist",
+    "animation",
+    "facebook",
+    "comments",
+    "facebook profile pic animation",
+    "Modal",
+    "view"
+  ],
+  "author": "Mina Samir Shafik <menasamer11@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MinaSamir11/react-native-swipe-modal-up-down/issues"
+  },
+  "homepage": "https://github.com/MinaSamir11/react-native-swipe-modal-up-down#readme"
+}
