@@ -85,4 +85,5 @@ duration | milliseconds | 450 | Length of animation
 DisableHandAnimation | Boolean | false | Disable Hand animate 
 PressToanimate | Boolean | null | close modal showing animation by set value equal true
 PressToanimateDirection | String | 'down' | Direction of animating Modal while closing, accepted value('up','down').
+OpenModalDirection | String | 'down' | Direction of animating Modal while Opening, accepted value('up','down').
 fade | Boolean | true | fading animation while opening/closing
