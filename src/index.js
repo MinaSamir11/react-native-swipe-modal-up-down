@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import {
   Modal,
@@ -13,9 +13,9 @@ import {
   Keyboard,
 } from 'react-native';
 
-const {height} = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
-const SwipeUpDownModal = props => {
+const SwipeUpDownModal = (props) => {
   const TIMING_CONFIG = {
     duration: props.duration ? props.duration : 450,
     easing: Easing.inOut(Easing.ease),
@@ -50,11 +50,11 @@ const SwipeUpDownModal = props => {
           x: animatedValueX,
           y: animatedValueY,
         });
-        pan.setValue({x: 0, y: 0}); // Initial value
+        pan.setValue({ x: 0, y: 0 }); // Initial value
       },
       onPanResponderMove: (evt, gestureState) => {
         if (gestureState.dy > 0) {
-          pan.setValue({x: 0, y: gestureState.dy});
+          pan.setValue({ x: 0, y: gestureState.dy });
         }
       },
       onPanResponderRelease: (evt, gestureState) => {
@@ -65,8 +65,9 @@ const SwipeUpDownModal = props => {
           if (gestureState.vy <= -0.7 || gestureState.dy <= -100) {
             setIsAnimating(true);
             Animated.timing(pan, {
-              toValue: {x: 0, y: -height},
+              toValue: { x: 0, y: -height },
               ...TIMING_CONFIG,
+              useNativeDriver: false,
             }).start(() => {
               setIsAnimating(false);
               props.onClose();
@@ -74,8 +75,9 @@ const SwipeUpDownModal = props => {
           } else if (gestureState.vy >= 0.5 || gestureState.dy >= 100) {
             setIsAnimating(true);
             Animated.timing(pan, {
-              toValue: {x: 0, y: height},
+              toValue: { x: 0, y: height },
               ...TIMING_CONFIG,
+              useNativeDriver: false,
             }).start(() => {
               setIsAnimating(false);
               props.onClose();
@@ -84,6 +86,7 @@ const SwipeUpDownModal = props => {
             setIsAnimating(true);
             Animated.spring(pan, {
               toValue: 0,
+              useNativeDriver: false,
             }).start(() => {
               setIsAnimating(false);
               // props.onClose();
@@ -93,6 +96,7 @@ const SwipeUpDownModal = props => {
           setIsAnimating(true);
           Animated.spring(pan, {
             toValue: 0,
+            useNativeDriver: false,
           }).start(() => {
             setIsAnimating(false);
             // props.onClose();
@@ -104,7 +108,6 @@ const SwipeUpDownModal = props => {
 
   useEffect(() => {
     if (props.modalVisible) {
-      console.disableYellowBox = true;
       animatedValueX = 0;
       animatedValueY = 0;
       pan.setOffset({
@@ -115,8 +118,8 @@ const SwipeUpDownModal = props => {
         x: 0,
         y: props.OpenModalDirection == 'up' ? -height : height,
       }); // Initial value
-      pan.x.addListener(value => (animatedValueX = value.value));
-      pan.y.addListener(value => (animatedValueY = value.value));
+      pan.x.addListener((value) => (animatedValueX = value.value));
+      pan.y.addListener((value) => (animatedValueY = value.value));
     }
   }, [props.modalVisible]);
 
@@ -129,6 +132,7 @@ const SwipeUpDownModal = props => {
           y: props.PressToanimateDirection == 'up' ? -height : height,
         },
         ...TIMING_CONFIG,
+        useNativeDriver: false,
       }).start(() => {
         setIsAnimating(false);
         props.onClose();
@@ -136,12 +140,12 @@ const SwipeUpDownModal = props => {
     }
   }, [props.PressToanimate]);
 
-  let handleGetStyle = opacity => {
+  let handleGetStyle = (opacity) => {
     return [
       [
         styles.container,
         {
-          transform: [{translateX: pan.x}, {translateY: pan.y}],
+          transform: [{ translateX: pan.x }, { translateY: pan.y }],
           opacity: opacity,
         },
         [props.HeaderStyle],
@@ -149,14 +153,13 @@ const SwipeUpDownModal = props => {
     ];
   };
 
-  let handleGetStyleBody = opacity => {
+  let handleGetStyleBody = (opacity) => {
     return [
       [
         styles.background,
         {
-          transform: [{translateX: pan.x}, {translateY: pan.y}],
+          transform: [{ translateX: pan.x }, { translateY: pan.y }],
           opacity: opacity,
-          backgroundColor: '#000',
         },
       ],
       [props.ContentModalStyle],
@@ -177,35 +180,41 @@ const SwipeUpDownModal = props => {
         setIsAnimating(true);
         Animated.timing(pan, {
           ...TIMING_CONFIG,
-          toValue: {x: 0, y: 0},
+          toValue: { x: 0, y: 0 },
+          useNativeDriver: false,
         }).start(() => {
           setIsAnimating(false);
         });
       }}>
-      <Animated.View
-        style={handleGetStyleBody(interpolateBackgroundOpacity)}
-        {...panResponder.panHandlers}>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <ImageBackground
-            source={props.ImageBackgroundModal && props.ImageBackgroundModal}
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
-            imageStyle={
-              props.ImageBackgroundModalStyle && props.ImageBackgroundModalStyle
-            }>
-            {props.ContentModal}
-          </ImageBackground>
-        </TouchableWithoutFeedback>
-      </Animated.View>
-      <Animated.View
-        style={handleGetStyle(interpolateBackgroundOpacity)}
-        {...panResponder.panHandlers}>
-        <TouchableWithoutFeedback>
-          {props.HeaderContent ? props.HeaderContent : <View />}
-        </TouchableWithoutFeedback>
-      </Animated.View>
+      <View style={[styles.ContainerModal, props.MainContainerModal]}>
+        <Animated.View
+          style={handleGetStyleBody(interpolateBackgroundOpacity)}
+          {...panResponder.panHandlers}>
+          <TouchableWithoutFeedback
+            onPress={() => Keyboard.dismiss()}
+            style={{ backgroundColor: 'red', flex: 1 }}>
+            <ImageBackground
+              source={props.ImageBackgroundModal && props.ImageBackgroundModal}
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
+              imageStyle={
+                props.ImageBackgroundModalStyle &&
+                props.ImageBackgroundModalStyle
+              }>
+              {props.ContentModal}
+            </ImageBackground>
+          </TouchableWithoutFeedback>
+        </Animated.View>
+        <Animated.View
+          style={handleGetStyle(interpolateBackgroundOpacity)}
+          {...panResponder.panHandlers}>
+          <TouchableWithoutFeedback>
+            {props.HeaderContent ? props.HeaderContent : <View />}
+          </TouchableWithoutFeedback>
+        </Animated.View>
+      </View>
     </Modal>
   );
 };
@@ -221,6 +230,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
   },
+  ContainerModal: { backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1 },
 });
 
 export default SwipeUpDownModal;
