@@ -76,7 +76,7 @@ Props | Type | default | Note
 ------------- | ------------- | ------------- | -------------
 modalVisible  | Boolean | false | Set visiablity of Modal
 ContentModal  | React Element | null | `for example: <View><Button text="Hello Mina" align="center" onPress={() => {}}/></View>`
-ContentModalStyle  | any | opacity, backgroundColor: '#000', flex: 1, marginTop: 55 | you shouldn't pass opacity or transform 
+ContentModalStyle  | any | opacity, flex: 1, marginTop: 55 | you shouldn't pass opacity or transform 
 HeaderContent  | React Element | null | `for example: <View style={{flex: 1, alignContent: 'center', alignItems: 'center', justifyContent: 'center', height: 40}}><Text> Header Content </Text></View>`
 HeaderStyle  | any | opacity, width: 700, marginTop: 50, position: 'absolute' | you shouldn't pass opacity or transform
 onClose  | func | () => null | Called when Modal closed
