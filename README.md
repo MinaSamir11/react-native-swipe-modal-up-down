@@ -88,3 +88,4 @@ PressToanimate | Boolean | null | close modal showing animation by set value equ
 PressToanimateDirection | String | 'down' | Direction of animating Modal while closing, accepted value('up','down').
 OpenModalDirection | String | 'down' | Direction of animating Modal while Opening, accepted value('up','down').
 fade | Boolean | true | fading animation while opening/closing
+MainContainerModal | style | backgroundColor: 'rgba(0, 0, 0, 0.5)',flex:1 | Main Container of modal
