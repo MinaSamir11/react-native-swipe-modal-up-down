@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 
 import {
   Modal,
@@ -11,9 +11,9 @@ import {
   Easing,
   ImageBackground,
   Keyboard,
-} from 'react-native';
+} from "react-native";
 
-const { height } = Dimensions.get('window');
+const { height } = Dimensions.get("window");
 
 const SwipeUpDownModal = (props) => {
   const TIMING_CONFIG = {
@@ -24,7 +24,7 @@ const SwipeUpDownModal = (props) => {
   const pan = useRef(new Animated.ValueXY()).current;
 
   let [isAnimating, setIsAnimating] = useState(
-    props.DisableHandAnimation ? true : false,
+    props.DisableHandAnimation ? true : false
   );
 
   let animatedValueX = 0;
@@ -103,7 +103,7 @@ const SwipeUpDownModal = (props) => {
           });
         }
       },
-    }),
+    })
   ).current;
 
   useEffect(() => {
@@ -116,7 +116,7 @@ const SwipeUpDownModal = (props) => {
       });
       pan.setValue({
         x: 0,
-        y: props.OpenModalDirection == 'up' ? -height : height,
+        y: props.OpenModalDirection == "up" ? -height : height,
       }); // Initial value
       pan.x.addListener((value) => (animatedValueX = value.value));
       pan.y.addListener((value) => (animatedValueY = value.value));
@@ -129,7 +129,7 @@ const SwipeUpDownModal = (props) => {
       Animated.timing(pan, {
         toValue: {
           x: 0,
-          y: props.PressToanimateDirection == 'up' ? -height : height,
+          y: props.PressToanimateDirection == "up" ? -height : height,
         },
         ...TIMING_CONFIG,
         useNativeDriver: false,
@@ -165,6 +165,17 @@ const SwipeUpDownModal = (props) => {
       [props.ContentModalStyle],
     ];
   };
+  let handleMainBodyStyle = (opacity) => {
+    return [
+      [
+        styles.ContainerModal,
+        {
+          opacity: opacity,
+        },
+      ],
+      [props.MainContainerModal],
+    ];
+  };
 
   let interpolateBackgroundOpacity = pan.y.interpolate({
     inputRange: [-height, 0, height],
@@ -185,36 +196,38 @@ const SwipeUpDownModal = (props) => {
         }).start(() => {
           setIsAnimating(false);
         });
-      }}>
-      <View style={[styles.ContainerModal, props.MainContainerModal]}>
+      }}
+    >
+      <Animated.View style={handleMainBodyStyle(interpolateBackgroundOpacity)}>
         <Animated.View
           style={handleGetStyleBody(interpolateBackgroundOpacity)}
-          {...panResponder.panHandlers}>
+          {...panResponder.panHandlers}
+        >
           <TouchableWithoutFeedback
             onPress={() => Keyboard.dismiss()}
-            style={{ backgroundColor: 'red', flex: 1 }}>
+            style={styles.TouchWithoutFeedBack}
+          >
             <ImageBackground
               source={props.ImageBackgroundModal && props.ImageBackgroundModal}
-              style={{
-                width: '100%',
-                height: '100%',
-              }}
+              style={styles.ImageBackground}
               imageStyle={
                 props.ImageBackgroundModalStyle &&
                 props.ImageBackgroundModalStyle
-              }>
+              }
+            >
               {props.ContentModal}
             </ImageBackground>
           </TouchableWithoutFeedback>
         </Animated.View>
         <Animated.View
           style={handleGetStyle(interpolateBackgroundOpacity)}
-          {...panResponder.panHandlers}>
+          {...panResponder.panHandlers}
+        >
           <TouchableWithoutFeedback>
             {props.HeaderContent ? props.HeaderContent : <View />}
           </TouchableWithoutFeedback>
         </Animated.View>
-      </View>
+      </Animated.View>
     </Modal>
   );
 };
@@ -227,10 +240,15 @@ const styles = StyleSheet.create({
   },
   container: {
     marginTop: 50,
-    position: 'absolute',
-    width: '100%',
+    position: "absolute",
+    width: "100%",
   },
-  ContainerModal: { backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1 },
+  ContainerModal: { backgroundColor: "rgba(0, 0, 0, 0.5)", flex: 1 },
+  ImageBackground: {
+    width: "100%",
+    height: "100%",
+  },
+  TouchWithoutFeedBack: { flex: 1 },
 });
 
 export default SwipeUpDownModal;
