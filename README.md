@@ -1,6 +1,9 @@
 # react-native-swipe-modal-up-down
 react native swipe up down it's animation modal to swipe down or up as Facebook comments, profile picture animation. it support flat-list and scroll view inside it without conflict with animation down and scrolling down
 
+
+[![N|Solid](https://gfycat.com/cookeddeepfrilledlizard)]()
+
 # Getting Started
 ```sh
 $ npm install react-native-swipe-modal-up-down
