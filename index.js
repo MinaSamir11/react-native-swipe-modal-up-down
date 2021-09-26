@@ -197,6 +197,7 @@ const SwipeUpDownModal = (props) => {
           setIsAnimating(false);
         });
       }}
+      onRequestClose={props.onRequestClose}
     >
       <Animated.View style={handleMainBodyStyle(interpolateBackgroundOpacity)}>
         <Animated.View
