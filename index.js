@@ -186,6 +186,7 @@ const SwipeUpDownModal = (props) => {
     <Modal
       animationType="none"
       transparent={true}
+      supportedOrientations={['portrait', 'landscape']}
       visible={props.modalVisible}
       onShow={() => {
         setIsAnimating(true);
